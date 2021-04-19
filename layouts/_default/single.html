@@ -11,6 +11,15 @@
 
     {{ if eq .Section "posts" }}
     <span class="article-date">{{ .Date.Format "2006-01-02" }}</span>
+    <span class="article-content">
+      {{ range $i := (slice "tags") }}
+      {{ with ($.Param $i) }}
+      {{ range $k := . }}
+      &nbsp;&nbsp;<a href='{{ relURL (print "/" $i "/" $k | urlize) }}'>{{ $k }}</a>
+      {{ end }}
+      {{ end }}
+      {{ end }}
+    </span>
     {{ end }}
 
     <div class="article-content">
